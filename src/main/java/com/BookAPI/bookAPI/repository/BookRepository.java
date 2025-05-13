@@ -1,6 +1,8 @@
 package com.BookAPI.bookAPI.repository;
 
 import com.BookAPI.bookAPI.model.Book;
+import jakarta.annotation.PostConstruct;
+import jakarta.annotation.PreDestroy;
 import org.springframework.stereotype.Repository;
 
 import java.util.ArrayList;
@@ -27,5 +29,15 @@ public class BookRepository {
 
     public void delete(String title){
         books.remove(title);
+    }
+
+    @PostConstruct
+    public void init(){
+        System.out.println("BookRepository initialized");
+    }
+
+    @PreDestroy
+    public void shutDown(){
+        System.out.println("BookRepository is being destroyed");
     }
 }

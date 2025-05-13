@@ -39,4 +39,24 @@ public class BookController {
         service.deleteBook(title);
         return ResponseEntity.noContent().build();
     }
+
+    @PutMapping("/{title}/borrow")
+    public ResponseEntity<Book> borrowBook(@PathVariable String title){
+        Book book = service.borrowBook(title);
+
+        if (book == null){
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(book);
+    }
+
+    @PutMapping("/{title}/return")
+    public ResponseEntity<Book> returnBook(@PathVariable String title){
+        Book book = service.returnBook(title);
+
+        if (book == null){
+            return ResponseEntity.notFound().build();
+        }
+        return ResponseEntity.ok(book);
+    }
 }
