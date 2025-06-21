@@ -3,6 +3,8 @@ package com.BookAPI.bookAPI.controller;
 import com.BookAPI.bookAPI.model.Book;
 import com.BookAPI.bookAPI.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -31,7 +33,8 @@ public class BookController {
 
     @PostMapping
     public ResponseEntity<Book> saveBook(@RequestBody Book book){
-        return ResponseEntity.ok(service.addBook(book));
+        Book savedBook = service.addBook(book);
+        return ResponseEntity.status(HttpStatus.CREATED).body(savedBook);
     }
 
     @DeleteMapping("/{title}")
